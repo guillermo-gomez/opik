@@ -1,0 +1,62 @@
+{
+  "version": 1,
+  "feature_root": "features",
+  "shared_roots": [
+    "core",
+    "shared"
+  ],
+  "features": {
+    "jira-flow": {
+      "allowed_dependencies": [
+        "contracts",
+        "observability"
+      ],
+      "durable_writes": [
+        "jira_issue_events"
+      ]
+    },
+    "adr-architect": {
+      "allowed_dependencies": [
+        "contracts"
+      ],
+      "durable_writes": [
+        "adr_proposals"
+      ]
+    },
+    "mes-simulator": {
+      "allowed_dependencies": [
+        "contracts"
+      ],
+      "durable_writes": [
+        "synthetic_orders"
+      ]
+    },
+    "solver-engine": {
+      "allowed_dependencies": [
+        "contracts"
+      ],
+      "durable_writes": [
+        "simulation_results"
+      ]
+    },
+    "observability": {
+      "allowed_dependencies": [
+        "contracts"
+      ],
+      "durable_writes": [
+        "telemetry_exports"
+      ]
+    },
+    "contracts": {
+      "allowed_dependencies": [],
+      "durable_writes": []
+    }
+  },
+  "forbidden_imports": [
+    "subprocess",
+    "os.system",
+    "eval",
+    "exec"
+  ],
+  "exception_registry": "architecture/exceptions.json"
+}
