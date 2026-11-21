@@ -1,0 +1,17 @@
+groups:
+  - name: epoc-0012
+    rules:
+      - alert: EpocExporterDown
+        expr: up{job="epoc-exporter"} == 0
+        for: 1m
+        labels:
+          severity: warning
+        annotations:
+          summary: "EPOC metrics exporter unavailable"
+      - alert: EpocHighFailureRate
+        expr: sum(rate(epoc_wp_runs_total{status!="success"}[5m])) / clamp_min(sum(rate(epoc_wp_runs_total[5m])), 0.001) > 0.05
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "EPOC WP failures exceed provisional 5% threshold"
